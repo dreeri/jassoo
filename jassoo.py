@@ -23,8 +23,8 @@ def random_image_url():
 def draw_text():
     image = Image.open(IMAGES_PATH+"img0.jpg")
     draw = ImageDraw.Draw(image)
-#    font = ImageFont.truetype("serif", 16)
-    draw.text((0, 0), "Sample texti", (255, 255, 255))
+    font = ImageFont.truetype("resources/liberation-serif/LiberationSerif-Regular.ttf", 182)
+    draw.text((0, 0), "Sample texti", (255, 255, 255), font=font)
     image.save(IMAGES_PATH+'img1.jpg')
 
 def main():
