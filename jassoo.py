@@ -7,6 +7,7 @@ from collections import defaultdict
 import urllib.request
 import json
 import csv
+import textwrap
 import random
 
 API_URL = "https://api.unsplash.com/photos/random/?client_id="
@@ -27,7 +28,13 @@ def draw_text(text):
     image = Image.open(IMAGES_PATH+"img0.jpg")
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("resources/liberation-serif/LiberationSerif-Regular.ttf", 182)
-    draw.text((0, 0), text, (255, 255, 255), font=font)
+    lines = textwrap.wrap(text, 40)
+    image_width, image_height = image.size
+    y_text = image_height / 10
+    for line in lines:
+        width, height = font.getsize(line)
+        draw.text(((image_width - width) / 2, y_text), line, (255, 255, 255), font=font)
+        y_text += height
     image.save(IMAGES_PATH+'img1.jpg')
 
 def harvest_csv(csv_file):
