@@ -23,11 +23,11 @@ def random_image_url():
     json_result = json.loads(data.decode('utf-8'))
     return json_result['urls']['raw']
 
-def draw_text():
+def draw_text(text):
     image = Image.open(IMAGES_PATH+"img0.jpg")
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("resources/liberation-serif/LiberationSerif-Regular.ttf", 182)
-    draw.text((0, 0), "Sample texti", (255, 255, 255), font=font)
+    draw.text((0, 0), text, (255, 255, 255), font=font)
     image.save(IMAGES_PATH+'img1.jpg')
 
 def harvest_csv(csv_file):
@@ -42,10 +42,10 @@ def get_quote():
     with open("resources/quote-data/data/quotes.csv") as csv_file:
         columns = harvest_csv(csv_file)
         random_int = random.randrange(0, len(columns["title"]))
-        print(columns['title'][random_int])
+        return columns['title'][random_int]
 
 def main():
     load_image(random_image_url())
-    draw_text()
+    draw_text(get_quote())
 
 main()
